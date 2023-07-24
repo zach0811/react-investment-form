@@ -1,4 +1,4 @@
-import "./Form.css";
+import classes from "./Form.module.css";
 import { useState } from "react";
 
 export const Form = (props) => {
@@ -17,28 +17,23 @@ export const Form = (props) => {
 
   // Handle input change and update form state
   const handleFormChange = (input, value) => {
-    console.log("form changing", input, value);
     setUserInput((prevInput) => {
       return {
         ...prevInput,
-        [input]: value,
+        [input]: +value,
       };
     });
   };
 
   const handleSubmit = (event) => {
-    console.log("Calculating Inputs");
     event.preventDefault();
-    // You can submit the form values to your backend or perform any other actions here
-    console.log(userInput);
-
     props.onCalculate(userInput);
   };
 
   return (
     <div>
-      <form className="form">
-        <div className="input-group">
+      <form className={classes.form}>
+        <div className={classes["input-group"]}>
           <p>
             <label htmlFor="current-savings">Current Savings ($)</label>
             <input
@@ -64,7 +59,7 @@ export const Form = (props) => {
             />
           </p>
         </div>
-        <div className="input-group">
+        <div className={classes["input-group"]}>
           <p>
             <label htmlFor="expected-return">
               Expected Interest (%, per year)
@@ -92,11 +87,19 @@ export const Form = (props) => {
             />
           </p>
         </div>
-        <p className="actions">
-          <button type="reset" className="buttonAlt" onClick={handleReset}>
+        <p className={classes.actions}>
+          <button
+            type="reset"
+            className={classes.buttonAlt}
+            onClick={handleReset}
+          >
             Reset
           </button>
-          <button type="submit" className="button" onClick={handleSubmit}>
+          <button
+            type="submit"
+            className={classes.button}
+            onClick={handleSubmit}
+          >
             Calculate
           </button>
         </p>
